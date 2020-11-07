@@ -1,9 +1,7 @@
-package minaginecli
+package main
 
 import (
-	"flag"
 	"fmt"
-	"os"
 
 	"github.com/mitchellh/cli"
 )
@@ -25,13 +23,13 @@ func (*EndCommand) Run(args []string) int {
 	fmt.Println("finish running!")
 	defer fmt.Println("done finish working!")
 
-	envToken := os.Getenv("MINAGINE_TOKEN")
-	envProject := os.Getenv("MINAGINE_PROJECT")
+	envToken, envProject := GetTokenAndProjectFromEnvVariables()
 
-	var token string
-	var project string
-	flag.StringVar(&token, "token", envToken, "token for authorization")
-	flag.StringVar(&project, "project", envProject, "project target function URL")
+	token, project, err := GetTokenAndProjectFromFlags(args, envToken, envProject)
+	if err != nil {
+		fmt.Printf("fail: parse argument, %s", err.Error())
+		return 1
+	}
 
 	if token == "" {
 		fmt.Println("token must be specified by argument or environment variable")

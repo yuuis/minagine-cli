@@ -5,8 +5,8 @@
 ## how to use
 
 ```shell script
-echo MINAGINE_TOKEN=xxxxxxxxx
-echo MINAGINE_PROJECT=xxxxxxxxx
+export MINAGINE_TOKEN=xxxxxxxxx
+export MINAGINE_PROJECT=xxxxxxxxx
 
 minagine start # start working
 minagine end # end working

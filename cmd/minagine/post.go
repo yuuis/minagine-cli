@@ -1,4 +1,4 @@
-package minaginecli
+package main
 
 import (
 	"errors"

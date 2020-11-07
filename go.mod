@@ -1,4 +1,4 @@
-module minagin-cli
+module github.com/yuuis/minagine-cli
 
 go 1.23
 
