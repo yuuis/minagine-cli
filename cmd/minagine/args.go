@@ -10,11 +10,8 @@ const (
 	projectEnvVariable = "MINAGINE_PROJECT"
 )
 
-func GetTokenAndProjectFromEnvVariables() (token, project string) {
-	token = os.Getenv(tokenEnvVariable)
-	project = os.Getenv(projectEnvVariable)
-
-	return
+func GetTokenAndProjectFromEnvVariables() (string, string) {
+	return os.Getenv(tokenEnvVariable), os.Getenv(projectEnvVariable)
 }
 
 func GetTokenAndProjectFromFlags(args []string, defaultToken, defaultProject string) (string, string, error) {

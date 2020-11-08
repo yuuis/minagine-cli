@@ -2,14 +2,18 @@ package main
 
 import (
 	"fmt"
-
 	"github.com/mitchellh/cli"
 )
 
-type StartCommand struct{}
+type StartCommand struct {
+	Token   string
+	Project string
+}
 
-func StartCommandFactory() (cli.Command, error) {
-	return &StartCommand{}, nil
+func StartCommandFactory(token, project string) func() (cli.Command, error) {
+	return func() (cli.Command, error) {
+		return &StartCommand{Token: token, Project: project}, nil
+	}
 }
 
 func (*StartCommand) Synopsis() string {
@@ -19,13 +23,11 @@ func (*StartCommand) Help() string {
 	return "usage: minagine start [option]"
 }
 
-func (*StartCommand) Run(args []string) int {
+func (c *StartCommand) Run(args []string) int {
 	fmt.Println("start working...")
-	defer fmt.Println("done start working!")
+	defer fmt.Println("done start working.")
 
-	envToken, envProject := GetTokenAndProjectFromEnvVariables()
-
-	token, project, err := GetTokenAndProjectFromFlags(args, envToken, envProject)
+	token, project, err := GetTokenAndProjectFromFlags(args, c.Token, c.Project)
 	if err != nil {
 		fmt.Printf("fail: parse argument, %s", err.Error())
 		return 1

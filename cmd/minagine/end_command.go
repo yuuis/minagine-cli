@@ -6,26 +6,29 @@ import (
 	"github.com/mitchellh/cli"
 )
 
-type EndCommand struct{}
+type EndCommand struct {
+	Token   string
+	Project string
+}
 
-func EndCommandFactory() (cli.Command, error) {
-	return &EndCommand{}, nil
+func EndCommandFactory(token, project string) func() (cli.Command, error) {
+	return func() (cli.Command, error) {
+		return &EndCommand{Token: token, Project: project}, nil
+	}
 }
 
 func (*EndCommand) Synopsis() string {
-	return "end working"
+	return "finish working"
 }
 func (*EndCommand) Help() string {
 	return "usage: minagine end [option]"
 }
 
-func (*EndCommand) Run(args []string) int {
-	fmt.Println("finish running!")
-	defer fmt.Println("done finish working!")
+func (c *EndCommand) Run(args []string) int {
+	fmt.Println("finish working...")
+	defer fmt.Println("done finish working.")
 
-	envToken, envProject := GetTokenAndProjectFromEnvVariables()
-
-	token, project, err := GetTokenAndProjectFromFlags(args, envToken, envProject)
+	token, project, err := GetTokenAndProjectFromFlags(args, c.Token, c.Project)
 	if err != nil {
 		fmt.Printf("fail: parse argument, %s", err.Error())
 		return 1
