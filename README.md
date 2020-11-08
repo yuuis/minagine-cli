@@ -1,7 +1,7 @@
 # minagine cli
 
 [minagine-kun](https://github.com/yuuis/minagine-kun)のcli。  
-先にこちらをデプロイする必要がある。デプロイ方法は、[minagine-kunのREADME](https://github.com/yuuis/minagine-kun)を参照。
+先にこちらをデプロイする必要がある。デプロイ方法は、[minagine-kun/README](https://github.com/yuuis/minagine-kun/blob/master/README.md)を参照。
 
 ## how to use
 
