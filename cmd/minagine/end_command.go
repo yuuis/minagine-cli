@@ -44,7 +44,7 @@ func (c *EndCommand) Run(args []string) int {
 		return 1
 	}
 
-	if err := Post("start", project, token); err != nil {
+	if err := Post("end", project, token); err != nil {
 		fmt.Println("failed finish working")
 	}
 
