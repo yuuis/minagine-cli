@@ -15,8 +15,7 @@ func GetTokenAndProjectFromEnvVariables() (string, string) {
 }
 
 func GetTokenAndProjectFromFlags(args []string, defaultToken, defaultProject string) (string, string, error) {
-	var token string
-	var project string
+	var token, project string
 
 	flag.StringVar(&token, "token", defaultToken, "token for authorization")
 	flag.StringVar(&project, "project", defaultProject, "project target function URL")
